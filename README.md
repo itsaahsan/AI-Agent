@@ -5,7 +5,7 @@ An AI-powered coding assistant that can interact with your file system to perfor
 ## Features
 
 - **File System Interaction**: List files and directories with size information
-- **File Content Reading**: Read and display contents of files
+- **File Content Reading**: Read and display contents of files (with size limits)
 - **Code Execution**: Run Python files with optional arguments
 - **File Writing**: Create or overwrite files with new content
 - **AI-Powered**: Uses Google's Gemini API for intelligent task processing
@@ -41,14 +41,14 @@ AI-Agent/
    cd AI-Agent
    ```
 
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   
-   Or if you're using uv:
+2. Install dependencies using uv (recommended):
    ```bash
    uv sync
+   ```
+
+   Or using pip:
+   ```bash
+   pip install google-genai python-dotenv
    ```
 
 3. Set up your environment variables:
@@ -74,7 +74,7 @@ python main.py "Run the calculator tests" --verbose
 The AI agent uses Google's Gemini API to understand user requests and map them to appropriate file operations:
 
 1. **File Listing**: `get_files_info()` - Lists files in a directory with size information
-2. **File Reading**: `get_file_content()` - Reads and returns the content of a specified file
+2. **File Reading**: `get_file_content()` - Reads and returns the content of a specified file (limited to 10KB by default)
 3. **Code Execution**: `run_python_file()` - Executes Python files with optional arguments
 4. **File Writing**: `write_file()` - Creates or overwrites files with new content
 
@@ -87,13 +87,14 @@ The AI agent uses Google's Gemini API to understand user requests and map them t
 
 ## Configuration
 
-The agent is configured to work within a specified working directory (currently set to `./calculator`) for security reasons. You can modify this in the `main.py` file.
+- The agent is configured to work within a specified working directory (currently set to `./calculator`) for security reasons. You can modify this in the `main.py` file.
+- File reading is limited to 10KB by default (configurable in `config.py`)
 
 ## Dependencies
 
-- Python 3.7+
-- Google Generative AI SDK
-- python-dotenv
+- Python 3.12+
+- google-genai 1.12.1
+- python-dotenv 1.1.0
 
 ## Contributing
 
@@ -105,4 +106,4 @@ The agent is configured to work within a specified working directory (currently 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
